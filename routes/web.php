@@ -18,8 +18,7 @@ use App\Models\Post;
 */
 
 Route::get('/', function () {
-    $posts = Post::all();
-    return view('home',compact('posts'));
+    return view('welcome');
 });
 
 Auth::routes();
@@ -30,6 +29,8 @@ Route::resource('/posts', PostController::class)->scoped([
     'post' => 'slug'
 ]);
 Route::resource('/comments', CommetController::class);
+
+
 Route::get('/user-control',[HomeController::class,'userControl'])->name('assign.role');
-route::get('/edit-user/{user}',[HomeController::class,'editUser'])->name('user.edit')->middleware('auth');
-route::post('/user-update/{id}',[HomeController::class,'updateUser']);
+route::get('/edit-user/{user}',[HomeController::class,'editUser'])->name('user.edit');
+route::post('/user-update/{id}',[HomeController::class,'updateUser'])->name('user.update');

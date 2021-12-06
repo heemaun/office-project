@@ -13,20 +13,25 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <p>
-                        Post slug: {{$post->slug}}
-                    </p>
-                    <p>
                         {{$post->body}}
                     </p>
                 </div>
                 <div class="card-footer">
                     <h6>Author: {{$post->user->name}}</h6>
                     Posted at: {{ $post->created_at->format('l, F-d,Y H:i A')}} <br>
-                    <a href="{{route('home')}}" class="btn btn-info">Back</a>
+                    <a href="{{route('home')}}" class="btn btn-info">Home</a>
                     @can('edit post')
-                    <a id="edit" href="{{ url('/') }}" class="btn btn-info">Edit</a>
+                    <a id="edit" href="{{route('posts.edit',$post->slug)}}" class="btn btn-info">Edit</a>
                     @endcan
-                    {{-- <a id="delete" href="{{route('delete.post',['id'=>$post->id])}}" class="btn btn-danger" >Delete</a> --}}
+                    @can('delete post')
+                    <td>
+                        <form method="POST" action="{{route('posts.destroy',$post->slug)}}">
+                            @method("DELETE")
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                    @endcan
                 </div>
                 </div>
                 @can('comment')

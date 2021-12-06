@@ -51,7 +51,6 @@ class HomeController extends Controller
 
         $user = User::find($id);
         $user->name = $r->name;
-        $user->email = $r->email;
         $user->roles()->detach();
         $user->assignRole($r->roles);
         $user->save();

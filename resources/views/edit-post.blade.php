@@ -11,7 +11,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="{{route('posts.update',$post->id)}}">
+                <form method="POST" action="{{route('posts.update',$post->slug)}}">
                     @csrf
                     @method("PUT")
                     <div class="card-body">
@@ -27,7 +27,7 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <a class="btn btn-primary float-left" href="{{ url('/') }}">Back</a>
+                        <a class="btn btn-primary float-left" href="{{route('home')}}">Home</a>
                         <button type="submit" class="btn btn-primary float-end">Update Post</button>
                     </div>
                 </form>

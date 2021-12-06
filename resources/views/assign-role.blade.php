@@ -17,6 +17,7 @@
                           <tr>
                             <th>User ID</th>
                             <th>Name</th>
+                            <th>Email</th>
                             <th>Roles</th>
                             <!-- <th>Action</th> -->
                           </tr>
@@ -26,6 +27,7 @@
                                 <tr>
                                     <td>{{$user->id}}</td>
                                     <td>{{$user->name}}</td>
+                                    <td>{{$user->email}}</td>
                                     <td>
                                         @if ($user->hasRole('admin'))
                                         Admin

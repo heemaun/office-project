@@ -13,7 +13,7 @@
                         </div>
                         <div class="form-group">
                             <label for="email">Email: </label>
-                            <input class="form-control" type="email" id="email" name="email" placeholder="Enter email here" value="{{$user->email}}">
+                            <input disabled class="form-control" type="email" id="email" name="email" value="{{$user->email}}">
                         </div>
                         <select name="roles" id="roles" class="form-select" aria-label="Default select example">
                             <option
@@ -22,7 +22,7 @@
                             @endif
                             value="admin">Admin</option>
                             <option
-                            @if ($user->hasRole('admin'))
+                            @if ($user->hasRole('writer'))
                             selected
                             @endif
                             value="writer">Writer</option>
@@ -38,7 +38,8 @@
                              value="user">User</option>
                         </select>
                         <div class="form-control">
-                            <button type="submit" class="btn btn-success">Save changes</button>
+                            <a href="{{route('home')}}" class="btn btn-info">Home</a>
+                            <button type="submit" class="btn btn-success float-end" onclick="return confirm('are your sure?')">Save changes</button>
                         </div>
                     </form>
                 </div>
