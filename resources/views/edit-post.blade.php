@@ -18,10 +18,16 @@
                     <div class="form-group">
                         <label for="title">Title</label>
                         <input type="text" class="form-control" id="title" name="title" value="{{$post->title}}">
+                        @error('title')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="body">Body</label>
                         <textarea id="body" name="body" class="form-control" rows="10">{{$post->body}}</textarea>
+                        @error('body')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     </div>
                     <!-- /.card-body -->

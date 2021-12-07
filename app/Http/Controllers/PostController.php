@@ -45,13 +45,23 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Post();
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->user_id = auth()->user()->id;
-        $post->slug = $this->slugMaker($request->title,0);
-        $post->save();
-        return redirect(route('home'));
+        $validated = $request->validate([
+            'title' => 'required|min:10|max:100',
+            'body' => 'required|min:100|max:100000'
+        ]);
+
+        if($validated){
+            $post = new Post();
+            $post->title = $request->title;
+            $post->body = $request->body;
+            $post->user_id = auth()->user()->id;
+            $post->slug = $this->slugMaker($request->title,0);
+            $post->save();
+            return redirect(route('home'));
+        }
+        else{
+            return back()->with('');
+        }
     }
 
     /**
@@ -85,11 +95,20 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $post = Post::find($post->id);
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->save();
-        return redirect(route('posts.show',$post->slug));
+        $validated = $request->validate([
+            'title' => 'required|min:10|max:100',
+            'body' => 'required|min:100|max:100000'
+        ]);
+        if($validated){
+            $post = Post::find($post->id);
+            $post->title = $request->title;
+            $post->body = $request->body;
+            $post->save();
+            return redirect(route('posts.show',$post->slug));
+        }
+        else{
+            return back()->with('');
+        }
     }
 
     /**

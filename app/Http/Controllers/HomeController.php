@@ -49,6 +49,10 @@ class HomeController extends Controller
     }
     public function updateUser(Request $r,$id)
     {
+        // $validated = $r->validateWithBag([
+        //     'name' => 'required'
+        // ]);
+
         $count = 0;
         foreach(User::all() as $user){
             if($user->hasRole('admin')){
