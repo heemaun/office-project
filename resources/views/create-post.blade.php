@@ -26,7 +26,7 @@
                     <!-- /.card-body -->
 
                     <div class="card-footer">
-                        <a class="btn btn-primary float-left" href="{{route('home')}}">Back</a>
+                        <a class="btn btn-primary float-left" href="{{route('home')}}">Home</a>
                         <button type="submit" class="btn btn-primary float-end">Add Post</button>
                     </div>
                 </form>

@@ -2,11 +2,11 @@
 @section('mytitle', ' | '.$post->title)
 @section('content')
 
-    <div class="container">
+    {{-- <div class="container"> --}}
         <section class="content">
             <div class="col-md-12">
                 <!-- general form elements -->
-                <div class="card card-primary">
+                <div class="card text-white bg-secondary">
                 <div class="card-header">
                     <h1 class="card-title">{{$post->title}}</h1>
                 </div>
@@ -35,7 +35,7 @@
                 </div>
                 </div>
                 @can('comment')
-                <div class="card text-white bg-secondary col-md-8">
+                <div class="card text-white bg-secondary col-md-12">
                     <div class="card-body ">
                         <form method="POST" action="{{route('comments.store',['post_id'=>$post->id])}}" id="add-cmt">
                             @csrf
@@ -50,14 +50,20 @@
                 </div>
                 @endcan
 
-                <div class="col-md-6">
+                <div class="col-md-12">
                     @foreach ($post->comments as $c)
-                            <a style="text-decoration: none" href="">{{$c->user->name}}</a>
-                            <p>{{$c->text}}</p>
-                            {{$c->created_at->format('D, M-d,Y H:i:s')}}<br>
+                    <div class="card text-white bg-secondary">
+                        <div class="card-body">
+                            <strong>{{$c->user->name}}</strong>
+                            <p class="float-end">{{$c->text}}</p><br>
+                        {{-- </div>
+                        <div class="card-footer"> --}}
+                            {{$c->created_at->format('D, M-d,Y H:i:s')}}
+                        </div>
+                    </div>
                     @endforeach
                 </div>
             </div>
         </section>
-    </div>
+    {{-- </div> --}}
 @endsection

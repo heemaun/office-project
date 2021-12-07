@@ -13,6 +13,14 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('writer')->only('create','store');
+        $this->middleware('editor')->only('edit','update');
+        $this->middleware('admin')->only('destroy');
+    }
+
     public function index()
     {
         $posts = Post::all();

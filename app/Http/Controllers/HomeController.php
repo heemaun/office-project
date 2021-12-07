@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -48,13 +49,28 @@ class HomeController extends Controller
     }
     public function updateUser(Request $r,$id)
     {
+        $count = 0;
+        foreach(User::all() as $user){
+            if($user->hasRole('admin')){
+                $count++;
+            }
+        }
+
+
 
         $user = User::find($id);
+
+        if($count == 1 && $user->hasRole('admin') && strcmp($r->roles,'admin') != 0){
+            // session('message','There must be atleast 1 admin in the system');
+            // return redirect()->route('user.edit',compact('user'));
+            return back()->with('message','There must be atleast 1 admin in the system');
+        }
+
         $user->name = $r->name;
         $user->roles()->detach();
         $user->assignRole($r->roles);
         $user->save();
         return redirect(route('assign.role'));
-        // return $id;
+        // return strcmp($r->roles,'admin');
     }
 }

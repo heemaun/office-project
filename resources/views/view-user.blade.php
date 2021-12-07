@@ -5,6 +5,11 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
+                    @if (Session::has('message'))
+                    <div class="alert alert-danger" role="alert">
+                        {{Session::get('message')}}
+                    </div>
+                    @endif
                     <form method="POST" action="{{route('user.update',['id'=>$user->id])}}" class="form-group">
                         @csrf
                         <div class="form-group">
@@ -39,6 +44,7 @@
                         </select>
                         <div class="form-control">
                             <a href="{{route('home')}}" class="btn btn-info">Home</a>
+                            <a href="{{route('assign.role')}}" class="btn btn-info">User Control</a>
                             <button type="submit" class="btn btn-success float-end" onclick="return confirm('are your sure?')">Save changes</button>
                         </div>
                     </form>

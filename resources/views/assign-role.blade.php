@@ -12,14 +12,14 @@
                       </div>
                       <!-- /.card-header -->
                       <div class="card-body">
-                        <table id="example2" class="table table-bordered table-hover">
+                        <table id="example2" class="table table-bordered table-hover text-center">
                           <thead>
                           <tr>
                             <th>User ID</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Roles</th>
-                            <!-- <th>Action</th> -->
+                            <th>Action</th>
                           </tr>
                           </thead>
                           <tbody>
