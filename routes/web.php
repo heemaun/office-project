@@ -4,8 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommetController;
+use App\Http\Controllers\EmailController;
+use App\Http\Controllers\SmsController;
+use App\Http\Controllers\TestsEnrollmentController;
 use App\Mail\WelcomeMail;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
 /*
@@ -24,7 +28,7 @@ use Illuminate\Support\Facades\Mail;
 //     return view('home',compact('posts'));
 // });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -39,7 +43,13 @@ Route::group(['middleware' => 'admin'], function () {
     route::post('/user-update/{id}',[HomeController::class,'updateUser'])->name('user.update');
 });
 
-Route::get('email', function() {
-    Mail::to('heemaun@gmail.com')->send(new WelcomeMail);
-    return new WelcomeMail();
-});
+// Route::get('email', function() {
+//     Mail::to('heemaun@gmail.com')->send(new WelcomeMail);
+//     return new WelcomeMail();
+// });
+
+Route::get('/email',[EmailController::class,'email']);
+
+Route::get('/send-testenrollment',[TestsEnrollmentController::class,'sendTestNotification']);
+
+Route::get('/sms',[SmsController::class,'index']);
