@@ -13,6 +13,9 @@
                     @hasrole('admin')
                     <a href="{{route('assign.role')}}" class="btn btn-info">Go to user control</a>
                     @endhasrole
+                    @can('mail')
+                    <a href="{{route('mails.create')}}" class="btn btn-info">Send Mail</a>
+                    @endcan
                 </div>
             </div>
             <div class="row">

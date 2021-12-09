@@ -23,7 +23,7 @@
                     </div>
                     <div class="form-group">
                         <label for="body">Body</label>
-                        <textarea id="body" name="body" class="form-control" placeholder="Enter your post here" rows="10">{{old('title')}}</textarea>
+                        <textarea id="body" name="body" class="form-control" placeholder="Enter your post here" rows="10">{{old('body')}}</textarea>
                         @error('body')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror

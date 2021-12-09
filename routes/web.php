@@ -7,8 +7,10 @@ use App\Http\Controllers\CommetController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\SmsController;
 use App\Http\Controllers\TestsEnrollmentController;
+use App\Mail\SampleMail;
 use App\Mail\WelcomeMail;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 
@@ -31,6 +33,7 @@ use Illuminate\Support\Facades\Mail;
 Auth::routes(['verify' => true]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::resource('/posts', PostController::class)->scoped([
     'post' => 'slug'
@@ -53,3 +56,10 @@ Route::get('/email',[EmailController::class,'email']);
 Route::get('/send-testenrollment',[TestsEnrollmentController::class,'sendTestNotification']);
 
 Route::get('/sms',[SmsController::class,'index']);
+
+Route::get('/send-mail',function(){
+    $users = User::all();
+    return view('create-mail',compact('users'));
+})->name('mails.create');
+
+Route::post('/email-markdown/{email}',[EmailController::class,'sendEmail'])->name('send.mail');
