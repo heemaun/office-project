@@ -16,12 +16,17 @@ class EmailController extends Controller
     }
     public function sendEmail(Request $request,$email)
     {
-        $emailData = [
-            'sender' => $email,
-            'text' => $request->body,
-        ];
-        Mail::to($request->names)->send(new MyMail($emailData));
-        // return $email;
+        $validate = $request->validate([
+            'body' => 'required|min:10|max:1000',
+        ]);
+        if($validate){
+            $emailData = [
+                'sender' => $email,
+                'text' => $request->body,
+            ];
+            Mail::to($request->names)->send(new MyMail($emailData));
+            return back();
+        }
         return back();
     }
 }
