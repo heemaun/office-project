@@ -29,6 +29,8 @@ class MyMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.samplemail')->from($this->emailData['sender'])->with('text',$this->emailData['text']);
+        return $this->markdown('emails.samplemail')
+                    ->subject('test mail')
+                    ->with('text',$this->emailData['text']);
     }
 }

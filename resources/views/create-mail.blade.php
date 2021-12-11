@@ -12,13 +12,13 @@
                 <legend class="card-header">Send your mail from here</legend>
                 <div class="card-body form-group">
                     <label for="name">Choose a reciever</label>
-                    <select name="name" id="name" class="form-control" >
+                    <select name="names" id="names" class="form-control" >
                         @foreach ($users as $user)
                         <option value="{{$user->email}}">{{$user->name}}</option>
                         @endforeach
                     </select>
                     <label for="body">Write your mail here</label>
-                    <textarea class="form-control" name="body" id="body" cols="30" rows="10" placeholder="enter your mail text here">{{old('body')}}</textarea>
+                    <textarea class="form-control" name="body" id="body" cols="30" rows="10" placeholder="enter your mail text here">This is a default 'Test messgage'{{old('body')}}</textarea>
                     @error('body')
                             <div class="alert alert-danger">{{ $message }}</div>
                     @enderror

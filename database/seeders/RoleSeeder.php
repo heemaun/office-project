@@ -54,7 +54,7 @@ class RoleSeeder extends Seeder
         $user = User::create([
             'id' => '1',
             'name' => 'admin',
-            'email' => 'ad@min.com',
+            'email' => 'office.project.11.12.2021@gmail.com',
             'password' => Hash::make('11111111'),
             'email_verified_at' => Carbon::now()->toDateTimeString(),
         ]);

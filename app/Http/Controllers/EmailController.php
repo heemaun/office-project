@@ -25,6 +25,7 @@ class EmailController extends Controller
                 'text' => $request->body,
             ];
             Mail::to($request->names)->send(new MyMail($emailData));
+            echo "Mail sent";
             return back();
         }
         return back();
