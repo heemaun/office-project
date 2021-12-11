@@ -16,14 +16,14 @@
                     <div class="card-body">
                     <div class="form-group">
                         <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" value="{{old('title')}}">
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title" value="{{"This is a post title".old('title')}}">
                         @error('title')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                     </div>
                     <div class="form-group">
                         <label for="body">Body</label>
-                        <textarea id="body" name="body" class="form-control" placeholder="Enter your post here" rows="10">{{old('body')}}</textarea>
+                        <textarea id="body" name="body" class="form-control" placeholder="Enter your post here" rows="10">This is post body. This is post body. This is post body. This is post body. This is post body. This is post body. This is post body. This is post body. This is post body. This is post body. {{old('body')}}</textarea>
                         @error('body')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror

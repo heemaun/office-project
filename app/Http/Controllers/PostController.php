@@ -57,7 +57,8 @@ class PostController extends Controller
             $post->user_id = auth()->user()->id;
             $post->slug = $this->slugMaker($request->title,0);
             $post->save();
-            return redirect(route('home'));
+            return redirect(route('home'))->with('post_added','Post added successfully');
+            // return session('post_added');
         }
         else{
             return back()->with('');
@@ -104,7 +105,7 @@ class PostController extends Controller
             $post->title = $request->title;
             $post->body = $request->body;
             $post->save();
-            return redirect(route('posts.show',$post->slug));
+            return redirect(route('posts.show',$post->slug))->with('post_updated','Post updated successfully');
         }
         else{
             return back()->with('');
@@ -120,7 +121,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect(route('home'));
+        return redirect(route('home'))->with('post_deleted','Post deleted successfully');
     }
 
 

@@ -31,6 +31,7 @@ class MyMail extends Mailable
     {
         return $this->markdown('emails.samplemail')
                     ->subject('test mail')
-                    ->with('text',$this->emailData['text']);
+                    ->with('text',$this->emailData['text'])
+                    ->from($this->emailData['sender']);
     }
 }

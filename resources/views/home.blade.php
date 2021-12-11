@@ -84,6 +84,23 @@
         </section>
         <!-- /.content -->
 </div>
+@if (Session::has('post_added'))
+    <script>
+        toastr.success("{!! Session::get('post_added') !!}");
+    </script>
+    {{Session::forget('post_added')}}
+@elseif (Session::has('post_updated'))
+    <script>
+        toastr.info("{!! Session::get('post_updated') !!}");
+    </script>
+    {{Session::forget('post_updated')}}
+@elseif(Session::has('post_deleted'))
+    <script>
+        toastr.error("{!! Session::get('post_deleted') !!}");
+    </script>
+    {{Session::forget('post_deleted')}}
+@endif
+
 
 @endsection
 

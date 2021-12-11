@@ -64,6 +64,11 @@
                     @endforeach
                 </div>
             </div>
+@if (Session::has('post_updated'))
+    <script>
+        toastr.info("{!! Session::get('post_updated') !!}");
+    </script>
+@endif
         </section>
     {{-- </div> --}}
 @endsection

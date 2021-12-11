@@ -31,6 +31,21 @@
         </div>
     </div>
 </div>
+@if (Session::has('email_send'))
+    <script>
+        toastr.options = {
+            "debug": false,
+            "positionClass": "toast-bottom-left",
+            "onclick": null,
+            "fadeIn": 3000,
+            "fadeOut": 5000,
+            "timeOut": 5000,
+            "extendedTimeOut": 1000
+        }
+        toastr.success("{!! Session::get('email_send') !!}")
+    </script>
+    {{session::forget('email_send')}}
+@endif
 
 @endsection
 
