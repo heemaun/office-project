@@ -34,14 +34,6 @@ class HomeController extends Controller
         $users = User::all();
         return view('assign-role',compact('users'));
     }
-    public function userControlUpdate(Request $r)
-    {
-        $users = User::all();
-        // foreach($users as $user){
-        //     $user->roles()->detach();
-        //     $user->assignRole($r['role'.$user->id]);
-        // }
-    }
     public function editUser(User $user)
     {
         // return $user;
@@ -49,32 +41,20 @@ class HomeController extends Controller
     }
     public function updateUser(Request $r,$id)
     {
-        // $validated = $r->validateWithBag([
-        //     'name' => 'required'
-        // ]);
-
         $count = 0;
         foreach(User::all() as $user){
             if($user->hasRole('admin')){
                 $count++;
             }
         }
-
-
-
         $user = User::find($id);
-
         if($count == 1 && $user->hasRole('admin') && strcmp($r->roles,'admin') != 0){
-            // session('message','There must be atleast 1 admin in the system');
-            // return redirect()->route('user.edit',compact('user'));
             return back()->with('message','There must be atleast 1 admin in the system');
         }
-
         $user->name = $r->name;
         $user->roles()->detach();
         $user->assignRole($r->roles);
         $user->save();
-        return redirect(route('assign.role'));
-        // return strcmp($r->roles,'admin');
+        return redirect(route('assign.role'))->with("user_updated",$user->name."'s data has been updated successfully");
     }
 }

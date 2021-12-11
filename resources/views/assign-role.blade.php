@@ -63,6 +63,12 @@
         </section>
         <!-- /.content -->
     </div>
+    @if (Session::has('user_updated'))
+        <script>
+            toastr.info("{!! Session::get('user_updated') !!}")
+        </script>
+        {{session()->forget('user_updated')}}
+    @endif
 @endsection
 
 

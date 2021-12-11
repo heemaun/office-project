@@ -66,6 +66,9 @@
             </div>
 @if (Session::has('post_updated'))
     <script>
+        toastr.options = {
+            "positionClass": "toast-bottom-left"
+        }
         toastr.info("{!! Session::get('post_updated') !!}");
     </script>
 @endif
