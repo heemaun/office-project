@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -45,23 +46,27 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        // $validated = Valida([
+        //     'title' => 'required|min:10|max:100',
+        //     'body' => 'required|min:100|max:100000'
+        // ]);
+        $validator = Validator::make($request->all(),[
             'title' => 'required|min:10|max:100',
-            'body' => 'required|min:100|max:100000'
+            'body' => 'required|min:100|max:10000'
         ]);
 
-        if($validated){
+        if($validator->fails()){
+            return response()->json(['status'=>0,'errors'=>$validator->getMessageBag()]);
+        }
+        else{
             $post = new Post();
             $post->title = $request->title;
             $post->body = $request->body;
             $post->user_id = auth()->user()->id;
             $post->slug = $this->slugMaker($request->title,0);
             $post->save();
-            return redirect(route('home'))->with('post_added','Post added successfully');
-            // return session('post_added');
-        }
-        else{
-            return back()->with('');
+            session()->put('post_added','Post added successfully');
+            return response()->json(['status'=>1]);
         }
     }
 
@@ -96,19 +101,20 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $validated = $request->validate([
+        $validator = Validator::make($request->all(),[
             'title' => 'required|min:10|max:100',
             'body' => 'required|min:100|max:100000'
         ]);
-        if($validated){
+        if(!$validator->fails()){
             $post = Post::find($post->id);
             $post->title = $request->title;
             $post->body = $request->body;
             $post->save();
-            return redirect(route('posts.show',$post->slug))->with('post_updated','Post updated successfully');
+            session()->put('post_updated','Post updated successfully');
+            return response()->json(['status'=>1]);
         }
         else{
-            return back()->with('');
+            return response()->json(['status'=>0,'errors'=>$validator->getMessageBag()]);
         }
     }
 
@@ -121,7 +127,8 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect(route('home'))->with('post_deleted','Post deleted successfully');
+        session()->put('post_deleted','Post deleted successfully');
+        return response()->json(['status'=>'1']);
     }
 
 

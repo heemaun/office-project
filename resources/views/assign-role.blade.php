@@ -65,6 +65,9 @@
     </div>
     @if (Session::has('user_updated'))
         <script>
+            toastr.options = {
+                "positionClass": "toast-bottom-left"
+            }
             toastr.info("{!! Session::get('user_updated') !!}")
         </script>
         {{session()->forget('user_updated')}}

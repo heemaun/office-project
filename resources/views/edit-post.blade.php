@@ -11,7 +11,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="POST" action="{{route('posts.update',$post->slug)}}">
+                <form method="POST" action="{{route('posts.update',$post->slug)}}" id="edit_post">
                     @csrf
                     @method("PUT")
                     <div class="card-body">
@@ -21,6 +21,7 @@
                         @error('title')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
+                        <span class="text-danger error-text title_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="body">Body</label>
@@ -28,6 +29,7 @@
                         @error('body')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
+                        <span class="text-danger error-text body_error"></span>
                     </div>
                     </div>
                     <!-- /.card-body -->

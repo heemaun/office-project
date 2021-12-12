@@ -10,7 +10,7 @@
                         {{Session::get('message')}}
                     </div>
                     @endif
-                    <form method="POST" action="{{route('user.update',['id'=>$user->id])}}" class="form-group">
+                    <form method="POST" action="{{route('user.update',['id'=>$user->id])}}" class="form-group" id="user_edit">
                         @csrf
                         <div class="form-group">
                             <label for="name">Name: </label>
@@ -18,37 +18,42 @@
                             @error('name')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
+                            <span class="text-danger error-text name_error"></span>
                         </div>
                         <div class="form-group">
                             <label for="email">Email: </label>
                             <input disabled class="form-control" type="email" id="email" name="email" value="{{$user->email}}">
                         </div>
-                        <select name="roles" id="roles" class="form-select" aria-label="Default select example">
-                            <option
-                            @if ($user->hasRole('admin'))
-                            selected
-                            @endif
-                            value="admin">Admin</option>
-                            <option
-                            @if ($user->hasRole('writer'))
-                            selected
-                            @endif
-                            value="writer">Writer</option>
-                            <option
-                            @if ($user->hasRole('editor'))
-                            selected
-                            @endif
-                             value="editor">Editor</option>
-                            <option
-                            @if ($user->hasRole('user'))
-                            selected
-                            @endif
-                             value="user">User</option>
-                        </select>
+                        <div class="form-group">
+                            <label for="roles">Assign a role</label>
+                            <select name="roles" id="roles" class="form-select" aria-label="Default select example">
+                                <option
+                                @if ($user->hasRole('admin'))
+                                selected
+                                @endif
+                                value="admin">Admin</option>
+                                <option
+                                @if ($user->hasRole('writer'))
+                                selected
+                                @endif
+                                value="writer">Writer</option>
+                                <option
+                                @if ($user->hasRole('editor'))
+                                selected
+                                @endif
+                                 value="editor">Editor</option>
+                                <option
+                                @if ($user->hasRole('user'))
+                                selected
+                                @endif
+                                 value="user">User</option>
+                            </select>
+                            <span class="text-danger error-text roles_error"></span>
+                        </div>
                         <div class="form-control">
                             <a href="{{route('home')}}" class="btn btn-info">Home</a>
                             <a href="{{route('assign.role')}}" class="btn btn-info">User Control</a>
-                            <button type="submit" class="btn btn-success float-end" onclick="return confirm('are your sure?')">Save changes</button>
+                            <button type="submit" class="btn btn-success float-end">Save changes</button>
                         </div>
                     </form>
                 </div>

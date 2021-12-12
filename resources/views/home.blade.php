@@ -57,7 +57,7 @@
                                 @endcan
                                 @can('delete post')
                                 <td>
-                                    <form method="POST" action="{{route('posts.destroy',$post->slug)}}">
+                                    <form class="delete-btn" method="POST" action="{{route('posts.destroy',$post->slug)}}">
                                         @method("DELETE")
                                         @csrf
                                         <button type="submit" class="btn btn-danger" onclick="return confirm('are your sure?')">Delete</button>

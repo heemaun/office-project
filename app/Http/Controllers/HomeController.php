@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -41,20 +42,30 @@ class HomeController extends Controller
     }
     public function updateUser(Request $r,$id)
     {
-        $count = 0;
-        foreach(User::all() as $user){
-            if($user->hasRole('admin')){
-                $count++;
+        $validator = Validator::make($r->all(),[
+            'name' => 'required|min:4|max:100',
+        ]);
+        if($validator->fails()){
+            return response()->json(['status'=>0,'errors'=>$validator->getMessageBag()]);
+        }
+        else{
+            $count = 0;
+            foreach(User::all() as $user){
+                if($user->hasRole('admin')){
+                    $count++;
+                }
             }
+            $user = User::find($id);
+            if($count == 1 && $user->hasRole('admin') && strcmp($r->roles,'admin') != 0){
+                return response()->json(['status'=>0,'errors'=>['admin error' => 'There has to be atleast one admin in the system']]);
+            }
+
+            $user->name = $r->name;
+            $user->roles()->detach();
+            $user->assignRole($r->roles);
+            $user->save();
+            session()->put("user_updated",$user->name."'s data updated successfully");
+            return response()->json(['status'=>1]);
         }
-        $user = User::find($id);
-        if($count == 1 && $user->hasRole('admin') && strcmp($r->roles,'admin') != 0){
-            return back()->with('message','There must be atleast 1 admin in the system');
-        }
-        $user->name = $r->name;
-        $user->roles()->detach();
-        $user->assignRole($r->roles);
-        $user->save();
-        return redirect(route('assign.role'))->with("user_updated",$user->name."'s data has been updated successfully");
     }
 }
