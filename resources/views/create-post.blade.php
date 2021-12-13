@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-group">
                         <label for="body">Body</label>
-                        <textarea id="body" name="body" class="form-control" placeholder="Enter your post here" rows="10">{{getRandomText(1000)}}</textarea>
+                        <textarea id="body" name="body" class="form-control" placeholder="Enter your post here" rows="10">{{getRandomText(10000)}}</textarea>
                         @error('body')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
@@ -43,16 +43,5 @@
             </div>
         </section>
     </div>
-<?php
-    function getRandomText($lenght)
-    {
-        $chars = "qwertyuiop asdfghjklz xcvbnmQWER TYUIOPASDF GHJKLZXCVB NMM1234567 890";
-        $str = "";
-        for($x=0;$x<$lenght;$x++){
-            $str = $str . $chars[rand(0,strlen($chars)-1)];
-        }
-        return $str;
-    }
-?>
 @endsection
 
