@@ -20,7 +20,7 @@
                         @endforeach
                     </select>
                     <label for="body">Write your mail here</label>
-                    <textarea class="form-control" name="body" id="body" cols="30" rows="10" placeholder="enter your mail text here"></textarea>
+                    <textarea class="form-control" name="body" id="body" cols="30" rows="10" placeholder="enter your mail text here">{{getRandomText(1000)}}</textarea>
                     @error('body')
                             <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -43,17 +43,6 @@
     </script>
     {{session::forget('email_send')}}
 @endif
-<?php
-    function getRandomText($lenght)
-    {
-        $chars = "qwertyuiop asdfghjklz xcvbnmQWER TYUIOPASDF GHJKLZXCVB NMM1234567 890";
-        $str = "";
-        for($x=0;$x<$lenght;$x++){
-            $str = $str . $chars[rand(0,strlen($chars)-1)];
-        }
-        return $str;
-    }
-?>
 @endsection
 
 
