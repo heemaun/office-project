@@ -35,6 +35,7 @@ Auth::routes(['verify' => true]);
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+Route::get('/all-posts',[PostController::class,'index2'])->name('all-posts');
 Route::resource('/posts', PostController::class)->scoped([
     'post' => 'slug'
 ]);

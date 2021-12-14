@@ -25,50 +25,50 @@
                     <h3 class="card-title">Posts</h3>
                   </div>
                   <!-- /.card-header -->
-                  <div class="card-body">
-                    <table id="example2" class="table table-bordered table-hover text-center">
-                      <thead>
-                      <tr>
-                        <th>Created At</th>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>View</th>
-                        @can('edit post')
-                        <th>Edit</th>
-                        @endcan
-                        @can('delete post')
-                        <th>Delete</th>
-                        @endcan
-                      </tr>
-                      </thead>
-                      <tbody>
-                          @foreach ($posts as $post)
-                            <tr>
-                                <td>{{$post->created_at->format('D, M-d,Y H:i:s')}}</td>
-                                <td>{{$post->title}}</td>
-                                <td>{{$post->user->name}}</td>
-                                <td>
-                                    <a id="view" href="{{route('posts.show',$post->slug)}}" class="btn btn-info">View</a>
-                                </td>
-                                @can('edit post')
-                                <td>
-                                    <a id="edit" href="{{route('posts.edit',$post->slug)}}" class="btn btn-success">Edit</a>
-                                </td>
-                                @endcan
-                                @can('delete post')
-                                <td>
-                                    <form class="delete-btn" method="POST" action="{{route('posts.destroy',$post->slug)}}">
-                                        @method("DELETE")
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('are your sure?')">Delete</button>
-                                    </form>
-                                </td>
-                                @endcan
-                            </tr>
-                          @endforeach
-                      </tbody>
-                    </table>
-                  </div>
+                    <div class="card-body">
+                        <table id="example2" class="table table-bordered table-hover text-center">
+                        <thead>
+                        <tr>
+                            <th>Created At</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>View</th>
+                            @can('edit post')
+                            <th>Edit</th>
+                            @endcan
+                            @can('delete post')
+                            <th>Delete</th>
+                            @endcan
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($posts as $post)
+                                <tr>
+                                    <td>{{$post->created_at->format('D, M-d,Y H:i:s')}}</td>
+                                    <td>{{$post->title}}</td>
+                                    <td>{{$post->user->name}}</td>
+                                    <td>
+                                        <a id="view" href="{{route('posts.show',$post->slug)}}" class="btn btn-info">View</a>
+                                    </td>
+                                    @can('edit post')
+                                    <td>
+                                        <a id="edit" href="{{route('posts.edit',$post->slug)}}" class="btn btn-success">Edit</a>
+                                    </td>
+                                    @endcan
+                                    @can('delete post')
+                                    <td>
+                                        <form class="delete-btn" method="POST" action="{{route('posts.destroy',$post->slug)}}">
+                                            @method("DELETE")
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger" onclick="return confirm('are your sure?')">Delete</button>
+                                        </form>
+                                    </td>
+                                    @endcan
+                                </tr>
+                            @endforeach
+                        </tbody>
+                        </table>
+                    </div>
                   <!-- /.card-body -->
                 </div>
                 <!-- /.card -->

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\PostDataTable;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -26,6 +27,13 @@ class PostController extends Controller
     {
         $posts = Post::all();
         return route('home',compact('posts'));
+        // return $dataTable->render('posts');
+    }
+    public function index2(PostDataTable $dataTable)
+    {
+        // $posts = Post::all();
+        // return route('home',compact('posts'));
+        return $dataTable->render('posts');
     }
 
     /**
